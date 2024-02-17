@@ -1,0 +1,35 @@
+{% extends 'app_general/components/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="home-landing">
+  <h1 class="home-landing-text">University Room Booking System</h1>
+  <h4 class="home-landing-text">Book Your Rooms Conveniently</h4>
+  <h6 class="home-landing-text">Reserve rooms for your meetings, events, and activities at your university</h6>
+  <p>
+    <a class="button button-primary" href="{% url 'app_booking:room_list' %}">Book a Room</a>
+  </p>
+</section>
+<section class="content-section">
+  <div class="content-container">
+    <h3 class="content-title text-center">How It Works</h3>
+    <div class="grid grid-3">
+      <div>
+        <img class="image-block" src="{% static 'app_general/home-about-1.jpg' %}">
+        <p>Our room booking system allows you to easily search for available rooms based on your requirements.</p>
+      </div>
+      <div>
+        <img class="image-block" src="{% static 'app_general/home-about-2.jpg' %}">
+        <p>Simply select the date, time, and duration of your event, and our system will show you suitable rooms.</p>
+      </div>
+      <div>
+        <img class="image-block" src="{% static 'app_general/home-about-3.jpg' %}">
+        <p>Once you find the perfect room, you can quickly book it online and receive instant confirmation.</p>
+      </div>
+    </div>
+    <p class="text-center">
+      <a class="button" href="{% url 'about' %}">Learn More About Our System</a>
+    </p>
+  </div>
+</section>
+{% endblock %}

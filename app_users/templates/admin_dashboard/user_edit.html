@@ -1,0 +1,38 @@
+{% extends 'app_general/components/base.html' %}
+
+{% block site_title %}Edit Profile - {% endblock %}
+
+{% block content %}
+<section class="content-section content-section-single">
+  <div class="content-container content-container-narrow">
+    <h3 class="content-title">Edit Profile</h3>
+    <form action="{% url 'edit_profile' %}" method="POST">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="form-field">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        {{ form.username.errors }}
+      </div>
+      <div class="form-field">
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        {{ form.email.errors }}
+      </div>
+      <div class="form-field">
+        {{ form.first_name.label_tag }}
+        {{ form.first_name }}
+        {{ form.first_name.errors }}
+      </div>
+      <div class="form-field">
+        {{ form.last_name.label_tag }}
+        {{ form.last_name }}
+        {{ form.last_name.errors }}
+      </div>
+      <div class="form-field">
+        <button class="button button-primary" type="submit">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% load static %}
+<header class="site-header">
+  <div class="site-header-item">
+    <a class="site-header-brand" href="{% url 'home' %}">
+      <span>Room Booking System</span>
+    </a>
+  </div>
+  <div class="site-header-menu">
+    <div class="site-header-item">
+      <a href="{% url 'app_booking:room_list' %}">
+        <span>Rooms</span>
+      </a>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="site-header-item">
+      <a href="{% url 'app_booking:booking_list' %}">
+        <span>Booking List</span>
+      </a>
+    </div>
+    <div class="site-header-item">
+      <a href="{% url 'dashboard' %}">
+        <span>{{ user.username|capfirst }}</span>
+      </a>
+    </div>
+    {% if user.is_superuser %}
+    <div class="site-header-item">
+      <a href="{% url 'user_list' %}">
+        <span>Dashboard</span>
+      </a>
+    </div>
+    {% endif %}
+    <div class="site-header-item">
+      <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">
+          <span>Logout</span>
+        </button>
+      </form>
+    </div>
+    {% else %}
+    <div class="site-header-item">
+      <a href="{% url 'login' %}">
+        <span>Login</span>
+      </a>
+    </div>
+    <div class="site-header-item">
+      <a href="{% url 'register' %}">
+        <span>Register</span>
+      </a>
+    </div>
+    {% endif %}
+  </div>
+  <div class="site-header-item">
+    <a href="{% url 'about' %}">
+      <span>About</span>
+    </a>
+  </div>
+  <div class="site-header-item">
+    <a class="site-header-toggle-menu-button">
+      <span>MENU</span>
+    </a>
+  </div>
+</header>

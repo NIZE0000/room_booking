@@ -1,0 +1,99 @@
+{% extends 'app_general/components/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="content-section">
+  <div class="content-container">
+    <h1 class="section-title">Available Rooms</h1>
+    <form method="get" class="search-form">
+      <input type="text" name="search" placeholder="Search..." class="search-input">
+    </form>
+    <div class="room-grid">
+      {% for room in rooms %}
+      <div class="room-item">
+        <div class="room-details">
+          <h2 class="room-name">{{ room.name }}</h2>
+          <p class="room-info">Capacity: {{ room.capacity }}</p>
+          <p class="room-info">Remaining: {{ room.remaining_rooms }}</p>
+        </div>
+        <div class="room-actions">
+          <a href="{% url 'app_booking:book_room' room.id %}" class="button button-primary">Book Now</a>
+        </div>
+      </div>
+      {% empty %}
+      <p>No available rooms.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .search-form {
+    margin-bottom: 20px;
+  }
+
+  .search-input {
+    padding: 8px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+
+  .search-button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .search-button:hover {
+    background-color: #0056b3;
+  }
+
+  .room-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .room-item {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .room-details {
+    margin-bottom: 10px;
+  }
+
+  .room-name {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
+  .room-info {
+    font-size: 16px;
+    color: #666;
+  }
+
+  .room-actions {
+    text-align: right;
+  }
+
+  @media (max-width: 768px) {
+    .room-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .room-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+{% endblock %}

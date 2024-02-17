@@ -1,0 +1,56 @@
+{% extends 'app_general/components/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="content-section">
+  <div class="content-container">
+    <h1 class="section-title">Bookings</h1>
+    <ul class="booking-list">
+      {% for booking in bookings %}
+      <li class="booking-item">
+        <div class="booking-details">
+          <h2 class="room-name">{{ booking.room.name }}</h2>
+          <p class="booking-time">{{ booking.start_time|date:'F d, Y' }} - {{ booking.end_time|date:'F d, Y' }}</p>
+        </div>
+      </li>
+      {% empty %}
+      <li class="no-booking">No bookings found.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .booking-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .booking-item {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .booking-details {
+    margin-bottom: 10px;
+  }
+
+  .room-name {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
+  .booking-time {
+    color: #666;
+    font-size: 16px;
+  }
+
+  .no-booking {
+    color: #999;
+    font-style: italic;
+  }
+</style>
+{% endblock %}
