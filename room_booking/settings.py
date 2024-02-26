@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-87)b2dwfnyj7b14k8gvc34_hb5iw)(h^=g*$*gtp6@p9&f@7xt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["asp-grand-vervet.ngrok-free.app", "127.0.0.1", "localhost"]
+CSRF_TRUSTED_ORIGINS = ['https://asp-grand-vervet.ngrok-free.app', "http://127.0.0.1", "http://localhost"]
 
 
 # Application definition
