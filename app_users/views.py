@@ -150,17 +150,17 @@ def edit_user(request):
 
 
 @login_required
-def delete_user(request, user_id):
+def delete_user(request):
     if request.method == 'POST':
-        try:
-            user = CustomUser.objects.get(pk=user_id)
-            profile = Profile.objects.get(user=user)
-            user.delete()
-            profile.delete()
-            return HttpResponse("User and profile deleted successfully")
-        except CustomUser.DoesNotExist:
-            return HttpResponseBadRequest("User does not exist")
-        except Profile.DoesNotExist:
-            return HttpResponseBadRequest("Profile does not exist")
+        email = request.POST.get('email')  # Retrieve the email from POST data
+        if email:
+            try:
+                user = get_object_or_404(CustomUser, email=email)
+                user.delete()
+                return redirect('user_list')
+            except CustomUser.DoesNotExist:
+                return HttpResponseBadRequest("User does not exist")
+        else:
+            return HttpResponseBadRequest("Invalid request: email field is required")
     else:
         return HttpResponseBadRequest("Invalid request: POST method required")
