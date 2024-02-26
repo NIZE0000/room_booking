@@ -27,3 +27,8 @@ class ExtendedProfileForm(forms.ModelForm):
             "phone": "เบอร์โทรศัพท์",
         }
         widgets = {"address": forms.Textarea(attrs={"rows": 3})}
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'email', 'first_name', 'last_name']
