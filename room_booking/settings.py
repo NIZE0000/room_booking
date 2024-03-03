@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "app_general.apps.AppGeneralConfig",
     "app_users.apps.AppUsersConfig",
     "app_booking.apps.AppBookingConfig",
+    'django_extensions',
+
 ]
 
 MIDDLEWARE = [
