@@ -1,0 +1,11 @@
+{% extends 'app_general/components/base.html' %}
+{% block content %}
+<div class="content-section">
+  <h1>Add Room</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Room</button>
+  </form>
+</div>
+{% endblock %}

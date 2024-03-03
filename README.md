@@ -11,7 +11,7 @@ The Room Booking Project is a class assignment that allows users to book rooms.
 ## Installation
 1. Clone the repository:
     ```
-    git clone https://github.com/your-username/room_booking_project.git
+    git clone https://github.com/NIZE0000/room_booking.git
     ```
 
 2. Navigate into the project directory:

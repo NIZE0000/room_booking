@@ -1,0 +1,95 @@
+{% extends 'app_general/components/base.html' %}
+{% block content %}
+
+<div class="content-section content-section-single">
+  <h1>Booking Approval</h1>
+  <table id="booking-table" class="display">
+    <thead>
+      <tr>
+        <th>Room Name</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for booking in bookings %}
+      <tr>
+        <td>{{ booking.room.name }}</td>
+        <td>{{ booking.start_time }}</td>
+        <td>{{ booking.end_time }}</td>
+        <td>{{ booking.status }}</td>
+        <td class="action-column">
+          <button class="approve-button" onclick="approveBooking('{{ booking.id }}')">
+            Approve
+          </button>
+          <button class="reject-button" onclick="rejectBooking('{{ booking.id }}')">
+            Reject
+          </button>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5">No bookings found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css"/>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#booking-table").DataTable();
+  });
+</script>
+
+<script>
+  function approveBooking(bookingId) {
+    window.location.href = "{% url 'app_booking:approve_booking' %}?booking_id=" + bookingId;
+  }
+
+  function rejectBooking(bookingId) {
+    window.location.href = "{% url 'app_booking:reject_booking' %}?booking_id=" + bookingId;
+  }
+</script>
+
+
+<style>
+  .approve-button {
+    background-color: #4caf50; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .reject-button {
+    background-color: #f44336; /* Red */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .action-column {
+    text-align: center;
+  }
+</style>
+
+{% endblock %}

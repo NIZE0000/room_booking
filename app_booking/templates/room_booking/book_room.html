@@ -5,7 +5,7 @@
 <section class="content-section">
   <div class="content-container">
     <h1 class="section-title">Book Room - {{ room.name }}</h1>
-    <form method="post" action="{% url 'app_booking:book_room' room.id %}" class="booking-form">
+    <form method="post" action="{% url 'app_booking:book_room' room.id %}" class="booking-form" id="bookingForm">
       {% csrf_token %}
       <div class="form-group">
         <label for="start_time" class="form-label">Start Time</label>
@@ -19,6 +19,43 @@
     </form>
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Get current datetime in UTC format
+    var now = new Date().toISOString().slice(0, 16);
+    // Set min attribute of start_time input to current datetime
+    document.getElementById('start_time').setAttribute('min', now);
+    // Set min attribute of end_time input to current datetime
+    document.getElementById('end_time').setAttribute('min', now);
+
+    // Add event listener to start_time input to update min attribute of end_time input
+    document.getElementById('start_time').addEventListener('change', function () {
+      var startTime = new Date(this.value);
+      var endTimeInput = document.getElementById('end_time');
+      // Set min attribute of end_time input to start_time input value
+      endTimeInput.setAttribute('min', this.value);
+      // Check if end_time input value is before start_time input value
+      if (new Date(endTimeInput.value) < startTime) {
+        // Reset end_time input value to start_time input value
+        endTimeInput.value = this.value;
+      }
+    });
+
+    // Add event listener to end_time input to update max attribute of start_time input
+    document.getElementById('end_time').addEventListener('change', function () {
+      var endTime = new Date(this.value);
+      var startTimeInput = document.getElementById('start_time');
+      // Set max attribute of start_time input to end_time input value
+      startTimeInput.setAttribute('max', this.value);
+      // Check if start_time input value is after end_time input value
+      if (new Date(startTimeInput.value) > endTime) {
+        // Reset start_time input value to end_time input value
+        startTimeInput.value = this.value;
+      }
+    });
+  });
+</script>
 
 <style>
   .booking-form {

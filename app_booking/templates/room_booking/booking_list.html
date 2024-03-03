@@ -5,31 +5,33 @@
 <section class="content-section">
   <div class="content-container">
     <h1 class="section-title">Bookings</h1>
-    <ul class="booking-list">
+    <div class="booking-grid">
       {% for booking in bookings %}
-      <li class="booking-item">
+      <div class="booking-card">
         <div class="booking-details">
           <h2 class="room-name">{{ booking.room.name }}</h2>
-          <p class="booking-time">{{ booking.start_time|date:'F d, Y' }} - {{ booking.end_time|date:'F d, Y' }}</p>
+          <p class="booking-time">{{ booking.start_time|date:'F d, Y H:i' }} - {{ booking.end_time|date:'F d, Y H:i' }}</p>
+          <p class="booking-status">Status: {{ booking.status }}</p>
+          <p class="seats-booked">Seats Booked: {{ booking.seats_booked }}</p>
         </div>
-      </li>
+      </div>
       {% empty %}
-      <li class="no-booking">No bookings found.</li>
+      <div class="no-booking">No bookings found.</div>
       {% endfor %}
-    </ul>
+    </div>
   </div>
 </section>
 
 <style>
-  .booking-list {
-    list-style: none;
-    padding: 0;
+  .booking-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
   }
 
-  .booking-item {
+  .booking-card {
     background-color: #f9f9f9;
     border-radius: 8px;
-    margin-bottom: 20px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
@@ -45,6 +47,19 @@
 
   .booking-time {
     color: #666;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .booking-status {
+    color: #333;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .seats-booked {
+    color: #888;
     font-size: 16px;
   }
 

@@ -14,7 +14,7 @@
     {% if user.is_authenticated %}
     <div class="site-header-item">
       <a href="{% url 'app_booking:booking_list' %}">
-        <span>Booking List</span>
+        <span>Booking</span>
       </a>
     </div>
     <div class="site-header-item">
@@ -28,6 +28,17 @@
         <span>Dashboard</span>
       </a>
     </div>
+    <div class="site-header-item">
+      <a href="{% url 'app_booking:booking_dashboard' %}">
+        <span>Approval</span>
+      </a>
+    </div>
+    <div class="site-header-item">
+      <a href="{% url 'app_booking:admin_room_list' %}">
+        <span>Room Magement</span>
+      </a>
+    </div>
+    
     {% endif %}
     <div class="site-header-item">
       <form action="{% url 'logout' %}" method="post">

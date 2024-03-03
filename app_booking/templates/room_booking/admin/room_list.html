@@ -1,0 +1,98 @@
+{% extends 'app_general/components/base.html' %}
+{% block content %}
+<div class="content-section content-section-single">
+  <h1>Room List</h1>
+  <div class="action-buttons">
+    <a href="{% url 'app_booking:add_room' %}" class="add-button">Add Room</a>
+  </div>
+  <table id="room-table" class="display">
+    <thead>
+      <tr>
+        <th>Room Name</th>
+        <th>Capacity</th>
+        <th>Room Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for room in rooms %}
+      <tr>
+        <td>{{ room.name }}</td>
+        <td>{{ room.capacity }}</td>
+        <td>{{ room.get_room_type_display }}</td>
+        <td class="action-column">
+          <a href="{% url 'app_booking:edit_room' room.id %}" class="edit-button">Edit</a>
+          <a href="{% url 'app_booking:delete_room' room.id %}" class="delete-button">Delete</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4">No rooms found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css"/>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#room-table").DataTable();
+  });
+</script>
+
+<style>
+  .action-buttons {
+    text-align: right;
+    margin-bottom: 10px;
+  }
+
+  .add-button {
+    background-color: #007bff; /* Blue */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .edit-button {
+    background-color: #4caf50; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .delete-button {
+    background-color: #f44336; /* Red */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .action-column {
+    text-align: center;
+  }
+</style>
+
+{% endblock %}
