@@ -1,4 +1,7 @@
 from django.db import models
+from django.conf import settings
+
+
 
 class Room(models.Model):
     ROOM_TYPE_CHOICES = (
@@ -21,6 +24,7 @@ class Booking(models.Model):
         ('rejected', 'Rejected'),
     )
 
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='bookings')
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='bookings') 
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()

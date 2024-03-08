@@ -12,6 +12,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from app_users.forms import ExtendedProfileForm, RegisterForm, UserProfileForm, EditProfileForm
 from app_users.models import CustomUser
 from app_users.utils.activation_token_generator import activation_token_generator
+from django.core.mail import send_mail
 
 
 def register(request: HttpRequest):
@@ -31,6 +32,8 @@ def register(request: HttpRequest):
                 "uidb64": urlsafe_base64_encode(force_bytes(user.id)),
                 "token": activation_token_generator.make_token(user),
             }
+
+            print(context['host'])
             email_body = render_to_string(
                 "app_users/activate_email.html", context=context
             )
@@ -38,7 +41,7 @@ def register(request: HttpRequest):
             # Send email
             email = EmailMessage(
                 to=[user.email],
-                subject="Activate account หน่อยครับ",
+                subject="Activate Booking account ",
                 body=email_body,
             )
             email.send()
